@@ -21,6 +21,21 @@ down to two minutes, drop the other two questions and ask only "did this
 finish sooner than doing it sequentially, honestly measured" — it is the one
 question the room cannot answer later from memory.
 
+## If the week's build didn't happen
+
+Part one's adversary option is the fallback, and it runs from nothing: it
+needs `fixtures/demo-feed`, the provided
+[`gtfs-fixture-builder`](../../.claude/skills/gtfs-fixture-builder/) skill,
+and a brief — none of the participant's own validators. Steer anyone whose
+codebase is behind there instead of letting them spend the hour catching up.
+
+For someone still back on slice 2, say it plainly: "Do not try to catch up in
+the next twenty minutes. Hand an adversary the fixture and the fixture-builder
+skill, have it build a feed that breaks the ingest you do have, and judge what
+it hands back. That is the whole technique, and it does not need slice 4." For
+part two, pair them with someone whose codebase has independent pieces left in
+it and have them drive one of the two threads.
+
 ## Failure modes to allow
 
 - Two threads editing the same file and conflicting. This is the whole
@@ -57,17 +72,27 @@ finishes the exercise and concludes "two threads would have beaten four
 here" has learned the real lesson, even though it sounds like a smaller win
 than "we ran four agents at once." Do not let the room grade itself on
 thread count. Ask what integration cost each pairing, and let that number,
-not how many threads were started, decide whose run actually succeeded.
+not how many threads were started, decide whose run actually succeeded. Make
+sure everyone writes their own number down before the debrief ends — the
+checkpoint asks for it, and it is the only part of today they cannot
+reconstruct from memory next week.
 
 ## Answer key references
 
-After integration, slice 4's findings must still be exactly the five listed
-in [`../../fixtures/ANSWER-KEY.md`](../../fixtures/ANSWER-KEY.md), under
-"Validation findings" — no more, no fewer. Over-flagging after a parallel
-run is usually not a new bug; it is two threads independently implementing
-overlapping rules, so the same defect gets reported twice under two
-different rule names. If a room's count comes back above five, look there
-before assuming a rule itself is wrong.
+After integration, each rule a participant has actually implemented must
+produce exactly the findings
+[`../../fixtures/ANSWER-KEY.md`](../../fixtures/ANSWER-KEY.md#validation-findings)
+attributes to that rule under "Validation findings", and no finding may
+appear that none of their rules accounts for. Do not hold the room to all
+five findings today. Part one adds at most one rule and part two adds two, so
+five is reachable only for someone who arrived with three already done; the
+full set is the end state after the continuation work, not this session's bar.
+
+Over-flagging is the number to chase. It is usually not a new bug; it is two
+threads independently implementing overlapping rules, so the same defect gets
+reported twice under two different rule names. If a finding turns up that no
+implemented rule explains, look there before assuming a rule itself is
+wrong.
 
 ## Coaching prompts to offer live
 

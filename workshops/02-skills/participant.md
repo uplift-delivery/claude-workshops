@@ -21,8 +21,10 @@ when to reach for it, and a body it reads once it does.
 Two parts.
 
 **Part one, roughly fifteen minutes.** Ask your agent to build a small
-fixture feed that exercises one specific defect — pick one from the
-seeded-defect table, and do not open
+fixture feed that exercises one specific defect — pick one of the five
+defect kinds named in
+[`../../fixtures/demo-feed/README.md`](../../fixtures/demo-feed/README.md),
+and do not open
 [`.claude/skills/gtfs-fixture-builder/`](../../.claude/skills/gtfs-fixture-builder/)
 yet. Check the result against that skill's own checklist once it's
 built. Then start a new task and do the same job again, this time with
@@ -34,9 +36,13 @@ increased.
 
 **Part two, roughly twenty-five minutes.** Author one skill capturing a
 GTFS trap that actually bit you during the week — most likely
-past-midnight times or calendar exception semantics. Write the body
-first: what the trap is, how to get it right. Then spend real effort on
-the description. Look at how `gtfs-fixture-builder`'s own description is
+past-midnight times or calendar exception semantics. In Claude Code a
+skill is a directory under `.claude/skills/` holding a `SKILL.md` whose
+YAML frontmatter carries a `name` and a `description`;
+[`gtfs-fixture-builder/SKILL.md`](../../.claude/skills/gtfs-fixture-builder/SKILL.md)
+is the worked example to copy that shape from. Write the body first:
+what the trap is, how to get it right. Then spend real effort on the
+description. Look at how `gtfs-fixture-builder`'s own description is
 worded — it says what the skill is *for* and lists the specific cases it
 covers, not just its name — and hold your description to the same bar.
 The description is what an agent reads to decide whether your skill is
@@ -59,11 +65,17 @@ you got wrong is not.
 
 Author a second skill describing how a validator is written in your
 system: where the file goes, how it registers, what its output looks
-like. Then use that skill to build the rule set in slice 4 from
-[`../../system/backlog.md`](../../system/backlog.md). This convention
-skill is what makes session 3 work — parallel agents produce mergeable
-code only when they agree on shape, and a skill is how that agreement
-gets written down once instead of repeated to every agent separately.
+like. Then use that skill to build two or three of slice 4's five rules
+from [`../../system/backlog.md`](../../system/backlog.md) — two or
+three, not all five. The point of this homework is proving the skill
+produces consistent rules without you restating the convention each
+time, and two or three demonstrate that as well as five do. The rules
+you leave undone are what session 3 splits across parallel agents;
+arriving with slice 4 finished leaves you nothing to delegate. This
+convention skill is what makes session 3 work — parallel agents produce
+mergeable code only when they agree on shape, and a skill is how that
+agreement gets written down once instead of repeated to every agent
+separately.
 
 ## In other tools
 

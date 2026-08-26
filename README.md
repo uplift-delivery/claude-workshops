@@ -36,7 +36,7 @@ setup happens inside session one, so you can arrive with nothing prepared.
 | `system/` | The end-state vision, the API contract, the GTFS reference, and the acceptance criteria for each slice of work. |
 | `fixtures/` | A hand-built GTFS feed (and a second version of it) with a known set of defects, plus the answer key for both. |
 | `workshops/` | The participant and facilitator guides for each of the three sessions. |
-| `.claude/skills/` | A skill provided for workshop 2, and a template for the one you author there. |
+| `.claude/skills/` | The GTFS fixture-builder skill workshop 2 consumes, and uses as the worked example for the skill you author there. |
 
 ## Bring your own stack
 

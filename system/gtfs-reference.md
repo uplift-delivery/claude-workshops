@@ -193,6 +193,14 @@ contains.
 | `feed_end_date` | Optional | date (`YYYYMMDD`) | Last date the feed's service data is valid for. |
 | `feed_version` | Optional | string | Publisher-defined version string for this feed, useful for tracking which feed a report was generated from. |
 
+`feed_start_date` and `feed_end_date` are declarative metadata about the
+feed, not a filter on queries. Whether a service runs on a date is decided by
+`calendar.txt` and `calendar_dates.txt` alone, using the algorithm below; a
+date outside the `feed_info.txt` window is still answered from the calendars,
+and answered normally. A window that fails to cover the dates the calendars
+actually serve is not a query problem — it is precisely what the
+`feed-window-coverage` validation rule exists to report.
+
 ## Resolving service on a date
 
 Every query that asks "what runs on date X" — including the departure board

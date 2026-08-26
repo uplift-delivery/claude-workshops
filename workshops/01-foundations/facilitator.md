@@ -3,6 +3,15 @@
 Companion to [`participant.md`](participant.md). Read that first; this
 guide assumes you know what participants were asked to do.
 
+## Before the session
+
+Confirm every participant has an LLM coding tool installed, signed in, and
+working — Claude Code, Copilot, Cursor, whichever they use. "No pre-work"
+covers the build, not the tooling: nothing in this session asks anyone to
+prepare code, but all of it assumes a working agent at minute zero. Say so in
+the invitation and check it as people arrive. Someone installing a tool during
+the hands-on block loses the exercise, not just the setup time.
+
 ## Timing
 
 | Minutes | What happens |

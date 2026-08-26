@@ -20,10 +20,13 @@ indirection.
 
 ## The exercise
 
-Two parts.
+Two parts, then integration.
 
 **Part one, roughly twenty minutes.** Define one subagent and delegate one
-scoped task to it. Pick either:
+scoped task to it. In Claude Code a subagent is a markdown file under
+`.claude/agents/` whose YAML frontmatter carries a `name`, a `description`
+saying when to delegate to it, and optionally the tools it may use; the body
+is the brief it runs on. Pick either:
 
 - A validator implementer, briefed with the convention skill you wrote in
   session 2, and handed one new rule from
@@ -39,13 +42,31 @@ the transcript of how it got there.
 **Part two, roughly twenty minutes.** Start two threads on independent work
 from [`../../system/backlog.md`](../../system/backlog.md) — two different
 validation rules, or a rule and a UI view whose data already exists. Isolate
-them with a worktree per thread so they cannot collide. Then integrate both
-and confirm the whole system still satisfies its acceptance criteria.
+them with a worktree per thread so they cannot collide.
 
-**Checkpoint** — both threads' work is merged, and slice 4's findings still
-match the five in
-[`../../fixtures/ANSWER-KEY.md`](../../fixtures/ANSWER-KEY.md) under
-"Validation findings" exactly — no more, no fewer.
+**Integration, roughly ten minutes after that.** Merge both threads' work and
+confirm the whole system still satisfies its acceptance criteria. It is timed
+separately from the threads on purpose: this is the part the session is
+measuring.
+
+**Checkpoint** — two things, one about the code and one about the cost.
+
+Every validation rule you have implemented produces exactly the findings
+[`../../fixtures/ANSWER-KEY.md`](../../fixtures/ANSWER-KEY.md#validation-findings)
+attributes to that rule under "Validation findings", and no finding appears
+that none of your rules should produce. Do not measure yourself against all
+five: part one adds at most one rule and part two adds two, so five is the
+end state after the continuation work, not today's bar. Over-flagging is the
+signal to chase — a finding no implemented rule accounts for usually means
+two threads implemented overlapping rules and the same defect is reported
+twice under two names.
+
+Then write down, somewhere you will find it again: how many threads you ran
+and why that number rather than one more, how long integration took measured
+from the last thread finishing to acceptance passing again, and what you had
+to fix by hand to get there. Two or three lines is enough. The continuation
+work asks you to make the same decision at a larger scale, and this is what
+you will check it against.
 
 ## What to notice
 
