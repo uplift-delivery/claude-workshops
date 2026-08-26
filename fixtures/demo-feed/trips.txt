@@ -1,0 +1,5 @@
+route_id,service_id,trip_id,trip_headsign,direction_id
+R1,WEEKDAY,T1,Riverside Park,0
+R1,WEEKEND,T2,Riverside Park,0
+R2,WEEKDAY,T3,Airport Station,0
+R3,NIGHT,T4,Harbor Terminal,1
