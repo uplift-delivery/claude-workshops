@@ -125,17 +125,21 @@ from the template above or from an existing fixture you are extending:
 
 ## Seeding a named defect
 
-Add at most one seeded defect per fixture. A feed with two defects can't
-tell you which one a validator actually caught. Each row below names the
-defect, how to introduce it starting from a clean feed, and what a correct
-validator should report — use the last column to check your own validator's
-output, not just the fixture's.
+Add at most one seeded defect per fixture when the fixture's job is to prove
+that a single validator check fires in isolation — a feed with two defects
+can't tell you which one a validator actually caught. Set that rule aside
+when the goal is different: probing for interactions or gaps, or building an
+adversarial feed meant to find what a validator misses when several defects
+compound. In that case, combine or intensify defects on purpose. Each row
+below names the defect, how to introduce it starting from a clean feed, and
+what a correct validator should report — use the last column to check your
+own validator's output, not just the fixture's.
 
 | Defect | How to seed it | What a correct validator should say |
 |---|---|---|
 | Past-midnight departure | Give a trip a `stop_times.txt` row with `departure_time` at `24:35:00` or later (`25:05:00` also works), keeping every departure time on that trip non-decreasing up to and including it. | Nothing — this is valid GTFS, not an error. A `24:35:00` departure on service date 2026-09-14 (a Monday) resolves to 2026-09-15T00:35, the following Tuesday. A validator that rejects or wraps it is the thing under test failing, not the fixture. |
 | Inverted calendar exception | Pick a `service_id` and a date where the weekday flag already says what you want, then write the `exception_type` that contradicts it instead of confirms it. Example: `WEEKDAY` runs Thursdays (`thursday` = `1`); to represent a holiday closure on Thursday, 2026-11-26, the correct row is `WEEKDAY,20261126,2`. The inverted defect is `WEEKDAY,20261126,1` — a no-op "add" for a day the service already runs, which silently discards the intended closure. | An added-service (`exception_type` `1`) exception on a date the calendar already serves is redundant and almost always a sign the author meant `2`. Flag it, and say which value would make the exception meaningful. |
-| Implausible travel speed | Place two consecutive `stop_times.txt` rows for one trip at stops whose real-world distance divided by the scheduled interval exceeds any plausible speed for the route's `route_type`. `fixtures/demo-feed` seeds this with trip `T3`: 18.2 km between stops `S2` and `S4` in a scheduled 120 seconds, or 546 km/h. | An error naming the trip, the two stops, and a computed speed — an implausible-travel-speed finding, in the ballpark of hundreds of km/h for a mode that cannot go that fast. |
+| Implausible travel speed | These rows are additive: append them only when you want this defect. The minimal feed above stays defect-free without them. Add a second trip so the base trip stays clean — to `trips.txt`: `R1,WEEKDAY,T2,Speed Defect Probe,0`. Add two stops to `stops.txt`: `STOP_FAR1,Market & 3rd,47.6120,-122.3400` and `STOP_FAR2,Airport Station,47.4500,-122.3090`. Add two rows to `stop_times.txt`: `T2,07:00:00,07:00:00,STOP_FAR1,10` and `T2,07:02:00,07:02:00,STOP_FAR2,20`. This is the same geometry `fixtures/demo-feed` uses for trip `T3` — 18.2 km covered in 120 seconds, roughly 546 km/h. | An error naming trip `T2`, stops `STOP_FAR1` and `STOP_FAR2`, and a computed speed in the neighborhood of 500-600 km/h — an implausible-travel-speed finding, for a mode that cannot go that fast. |
 | Orphan stop | Add a row to `stops.txt` for a stop that no `stop_times.txt` row references. | A warning that the stop appears in no trip and is unreachable — an unused-stop finding, naming the stop. |
 | Null island stop | Set both `stop_lat` and `stop_lon` to `0` for one stop. | An error naming the stop and its coordinates — a null-island-stop finding. This is a distinct defect from an orphan stop even though a single stop can carry both at once, as `fixtures/demo-feed`'s stop `S5` does. |
 | Low route color contrast | Set `route_color` and `route_text_color` to a pair too close in luminance to read against each other — `FFFFFF` background with `FFFF00` text is the reference case in `fixtures/demo-feed`'s route `R1`. | A warning naming the route and both color values — a route-color-contrast finding. Both values are individually well-formed hex codes; the defect is contrast, not format. |
