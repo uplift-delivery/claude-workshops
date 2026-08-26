@@ -1,0 +1,4 @@
+route_id,agency_id,route_short_name,route_long_name,route_type,route_color,route_text_color
+R1,BTA,1,Harbor - Riverside,3,FFFFFF,FFFF00
+R2,BTA,2,Airport Express,3,0B5394,FFFFFF
+R3,BTA,3,Night Owl,3,000000,FFFFFF

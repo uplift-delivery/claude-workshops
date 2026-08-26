@@ -829,7 +829,9 @@ exceptions), `2026-09-19` (Saturday; `NIGHT`, `WEEKEND`; no exceptions).
 
 **## Departure boards** — four tables, one per date above, for stop `S2`, with
 columns feed time, trip, and wall-clock instant, transcribed from the verified
-script output. Add a note under the tables: every one of these dates has a
+script output. Write wall-clock instants in the ISO form the API contract
+specifies — `2026-09-15T00:52`, not `2026-09-15 00:52` — so the key and the
+contract agree; the verification script prints a space, which you convert. Add a note under the tables: every one of these dates has a
 `24:52:00` departure that falls on the *following* calendar day. A departure
 board that omits it, or that renders it as `00:52` on the queried date, is
 wrong.
@@ -875,7 +877,7 @@ check "test -f $F" "file exists"
 for h in '## Services on a date' '## Departure boards' '## Validation findings' '## Feed diff'; do
   check "grep -qF '$h' $F" "section present: $h"
 done
-check "grep -q '2026-09-15 00:52' $F" "records the past-midnight wall clock instant"
+check "grep -q '2026-09-15T00:52' $F" "records the past-midnight wall clock instant"
 check "grep -q '24:52:00' $F" "records the raw feed time"
 check "grep -c 'T4' $F | grep -qv '^0$'" "references trip T4"
 check "grep -q '2026-07-03' $F" "covers the exception-removal date"
@@ -1791,7 +1793,9 @@ set -u
 fail=0
 check() { if eval "$1" >/dev/null 2>&1; then echo "PASS: $2"; else echo "FAIL: $2"; fail=1; fi; }
 
-# every relative markdown link in every tracked markdown file resolves
+# every relative markdown link in the DELIVERABLE markdown resolves.
+# docs/ is excluded deliberately: the plan and spec are process artifacts, and
+# their fenced bash blocks contain grep patterns that look like markdown links.
 while read -r file; do
   dir=$(dirname "$file")
   while read -r target; do
@@ -1801,7 +1805,7 @@ while read -r file; do
   done < <(grep -oh '](\([^)]*\))' "$file" 2>/dev/null \
            | sed 's/](//; s/)$//' \
            | grep -v '^http' | grep -v '^mailto')
-done < <(git ls-files '*.md')
+done < <(git ls-files '*.md' | grep -v '^docs/')
 
 # no committed implementation code
 check "! git ls-files | grep -qE '\\.(ts|js|py|cs|go|java|rb|tf|bicep|yaml|yml|json)$'" "no implementation or config code committed"
@@ -1809,9 +1813,14 @@ check "! git ls-files | grep -qE '\\.(ts|js|py|cs|go|java|rb|tf|bicep|yaml|yml|j
 # global constraint: acceptance files stay tool-neutral
 check "! grep -rqiE '\\b(aws|azure|lambda|terraform|bicep|pytest|jest)\\b' system/acceptance/" "acceptance criteria stay tool-neutral"
 
-# identifiers used consistently
-for id in S1 S2 S3 S4 S5 S6 R1 R2 R3 T1 T2 T3 T4 WEEKDAY WEEKEND NIGHT; do
-  check "grep -q '$id' fixtures/ANSWER-KEY.md || grep -rq '$id' system/" "identifier $id referenced somewhere"
+# every fixture identifier mentioned in prose must exist in the fixture feed.
+# The check runs prose -> fixture, not the reverse: an identifier that lives
+# only in the feed (S1, S6) is legitimate, but a typo in prose is not.
+for id in $(grep -rhoE '\\b[SRT][0-9]\\b' system/ workshops/ fixtures/ANSWER-KEY.md | sort -u); do
+  check "grep -rq '$id' fixtures/demo-feed/" "prose identifier $id exists in the fixture"
+done
+for id in WEEKDAY WEEKEND NIGHT; do
+  check "grep -q '$id' fixtures/demo-feed/calendar.txt" "service $id exists in the fixture"
 done
 
 exit $fail
