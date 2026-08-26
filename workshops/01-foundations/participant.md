@@ -18,8 +18,9 @@ slices on top of the wrong assumption.
 
 ## The exercise
 
-Goal: get a health endpoint running and reachable, on the cloud you choose,
-using the agent to scaffold it.
+Goal: get a health endpoint running and reachable — on your cloud if your
+account is ready, running locally otherwise — using the agent to scaffold
+it.
 
 1. Open [`../../system/api-contract.md`](../../system/api-contract.md) and
    give the agent the health endpoint section directly, rather than
