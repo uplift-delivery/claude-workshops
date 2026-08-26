@@ -1,0 +1,7 @@
+stop_id,stop_name,stop_lat,stop_lon
+S1,Harbor Terminal,47.5980,-122.3350
+S2,Market & 3rd,47.6120,-122.3400
+S3,Riverside Park,47.6480,-122.3600
+S4,Airport Station,47.4500,-122.3090
+S5,Null Island Stop,0.0,0.0
+S6,Eastgate Transit Center,47.5800,-122.1400

@@ -1,0 +1,1 @@
+This is the same transit agency's feed one schedule pick later, generated for the next quarter. It serves as the comparison target for diff analysis: changes include route removals, service modifications, and geographic relocations. See [../ANSWER-KEY.md](../ANSWER-KEY.md) for the complete list of changes.
