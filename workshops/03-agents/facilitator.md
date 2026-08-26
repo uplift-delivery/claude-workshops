@@ -13,6 +13,14 @@ guide assumes you know what participants were asked to do.
 | 45–55 | Integration. This will run over — let it. Integration is the lesson of this session, not the overhead standing in front of it. |
 | 55–60 | Debrief. |
 
+If integration is still running at minute 55, do not let it silently eat the
+debrief — that is the one slot where this session's lesson gets said out
+loud. Call time on new merge attempts, and run the debrief with whatever has
+landed so far; unmerged threads are themselves debrief material. If you are
+down to two minutes, drop the other two questions and ask only "did this
+finish sooner than doing it sequentially, honestly measured" — it is the one
+question the room cannot answer later from memory.
+
 ## Failure modes to allow
 
 - Two threads editing the same file and conflicting. This is the whole

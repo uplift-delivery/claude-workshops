@@ -43,8 +43,9 @@ them with a worktree per thread so they cannot collide. Then integrate both
 and confirm the whole system still satisfies its acceptance criteria.
 
 **Checkpoint** — both threads' work is merged, and slice 4's findings still
-match the five in `../../fixtures/ANSWER-KEY.md#validation-findings` exactly
-— no more, no fewer.
+match the five in
+[`../../fixtures/ANSWER-KEY.md`](../../fixtures/ANSWER-KEY.md) under
+"Validation findings" exactly — no more, no fewer.
 
 ## What to notice
 
@@ -59,10 +60,14 @@ each thread did on its own.
 
 Break slices 4, 5, and 6 into their independent pieces — the five
 validation rules, the feed diff, which needs only ingest, and the UI views
-whose data already exists — and fan those pieces, one per thread, across
-parallel agents in Zed or Omnigent. Keep a note of every time parallelism
-cost more than it saved. That note is the most useful thing you will take
-back to client work.
+whose data already exists. Before you open a single thread, decide how many
+you are going to run at once, and write down why that number and not the
+maximum available is the right one for what you know about the pieces and
+about each other. Then run it in Zed or Omnigent and check that decision
+against what integration actually cost once everything is merged. The
+number of threads is a decision with a cost attached to it, not a default —
+getting that decision right, more than any code this system ends up with,
+is what you will take back to client work.
 
 ## In other tools
 
