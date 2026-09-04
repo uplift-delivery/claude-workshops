@@ -7,12 +7,17 @@ remember what a piece you're building is for.
 
 ## What we are building
 
-The Transit Feed Service is a serverless system built around GTFS, the
-General Transit Feed Specification. It ingests a GTFS feed, validates that
-feed against a set of specification rules, answers questions about the
-service the feed describes, and exposes a browser UI over all of it. A
-transit agency publishes a feed; this system tells you whether the feed is
-sound and what service it describes on a given day.
+The Transit Feed Service is a system built around GTFS, the General Transit
+Feed Specification. It ingests a GTFS feed, validates that feed against a
+set of specification rules, answers questions about the service the feed
+describes, and exposes a browser UI over all of it. A transit agency
+publishes a feed; this system tells you whether the feed is sound and what
+service it describes on a given day.
+
+The components below are described as functions because that is how their
+boundaries fall, not because anything here requires a serverless
+deployment. Every acceptance condition in this repository is satisfied by a
+single local process if that is what you want to run.
 
 ## Why GTFS
 

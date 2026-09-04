@@ -107,6 +107,8 @@ Run this checklist over any feed before calling it done, whether it started
 from the template above or from an existing fixture you are extending:
 
 - [ ] Every `trip_id` in `stop_times.txt` exists in `trips.txt`.
+- [ ] Every `route_id` in `trips.txt` exists in `routes.txt`, and every
+      `agency_id` in `routes.txt` exists in `agency.txt`.
 - [ ] Every `stop_id` in `stop_times.txt` (and any other file that names one)
       resolves in `stops.txt`.
 - [ ] Every `service_id` in `trips.txt` and `calendar_dates.txt` resolves in
@@ -116,8 +118,11 @@ from the template above or from an existing fixture you are extending:
       repeats and decreases are not).
 - [ ] `arrival_time` never exceeds `departure_time` at the same stop (they
       may be equal).
-- [ ] `departure_time` never decreases from one stop to the next along a
-      trip, including across the `24:00:00` boundary.
+- [ ] `arrival_time` at each stop is never earlier than `departure_time` at
+      the previous stop along the trip, including across the `24:00:00`
+      boundary. Comparing departures to departures is not enough — that
+      passes a trip which arrives somewhere before it left the stop before
+      it.
 - [ ] Every date (`calendar.txt`, `calendar_dates.txt`, `feed_info.txt`) is
       `YYYYMMDD` with no separators, and is a real calendar date.
 - [ ] Every color (`route_color`, `route_text_color`) is six hex digits with
@@ -143,7 +148,7 @@ own validator's output, not just the fixture's.
 | Orphan stop | Add a row to `stops.txt` for a stop that no `stop_times.txt` row references. | A warning that the stop appears in no trip and is unreachable — an unused-stop finding, naming the stop. |
 | Null island stop | Set both `stop_lat` and `stop_lon` to `0` for one stop. | An error naming the stop and its coordinates — a null-island-stop finding. This is a distinct defect from an orphan stop even though a single stop can carry both at once, as `fixtures/demo-feed`'s stop `S5` does. |
 | Low route color contrast | Set `route_color` and `route_text_color` to a pair too close in luminance to read against each other — `FFFFFF` background with `FFFF00` text is the reference case in `fixtures/demo-feed`'s route `R1`. | A warning naming the route and both color values — a route-color-contrast finding. Both values are individually well-formed hex codes; the defect is contrast, not format. |
-| Expired feed window | Set `feed_info.txt`'s `feed_end_date` to a date earlier than the latest `end_date` across `calendar.txt`. `fixtures/demo-feed` seeds this with a `feed_end_date` of 20260731 against calendars running through 20261231. | A warning naming the gap — a feed-window-coverage finding — because the feed claims validity for a shorter span than the service data it actually contains. |
+| Feed window that misses the calendars | Set `feed_info.txt`'s `feed_end_date` earlier than the latest `end_date` across `calendar.txt`, or its `feed_start_date` later than the earliest `start_date`. `fixtures/demo-feed` seeds the first direction with a `feed_end_date` of 20260731 against calendars running through 20261231; `fixtures/demo-feed-v2` seeds the second with a `feed_start_date` of 20260901 against calendars starting 20260601. | A warning naming the uncovered span — a feed-window-coverage finding — because the feed claims validity for a shorter span than the service data it actually contains. Both ends count: a rule that only compares end dates reports nothing on `demo-feed-v2` and is under-flagging. |
 
 ## Before you hand the feed over
 

@@ -65,8 +65,13 @@ as `00:52` on the queried date instead of rolling over, is wrong.
 
 ## Validation findings
 
-The complete expected set of findings for `demo-feed` is five. A report with
-extra findings is over-flagging; a report with fewer is under-flagging.
+A report with extra findings is over-flagging; a report with fewer is
+under-flagging. Both feeds have an expected set, and they are not the same
+set — check your report against the feed you actually validated.
+
+### `demo-feed`
+
+The complete expected set is five findings.
 
 | Rule | Severity | Location | Detail |
 |---|---|---|---|
@@ -75,6 +80,33 @@ extra findings is over-flagging; a report with fewer is under-flagging.
 | `unused-stop` | warning | stop `S5` | appears in no `stop_times` row |
 | `route-color-contrast` | warning | route `R1` | `FFFFFF` background, `FFFF00` text |
 | `feed-window-coverage` | warning | `feed_info.txt` | `feed_end_date` 20260731 precedes the calendars' 20261231 |
+
+### `demo-feed-v2`
+
+Slice 5 renders a report for every ingested feed and slice 6 needs this one
+ingested, so you will validate it too. Its expected set is also five
+findings, but three of the rules land differently.
+
+| Rule | Severity | Location | Detail |
+|---|---|---|---|
+| `null-island-stop` | error | stop `S5` | latitude 0, longitude 0 |
+| `unused-stop` | warning | stop `S4` | removing route `R2` and trip `T3` left it served by no trip |
+| `unused-stop` | warning | stop `S5` | appears in no `stop_times` row |
+| `route-color-contrast` | warning | route `R1` | `FFFFFF` background, `FFFF00` text |
+| `feed-window-coverage` | warning | `feed_info.txt` | `feed_start_date` 20260901 begins after the calendars' 20260601 |
+
+Two of those are worth stating outright, because they are what a rule
+written only against `demo-feed` gets wrong.
+
+`implausible-travel-speed` produces nothing here. Trip `T3` carried the only
+impossible hop and it is gone; the fastest hop in v2 is `T4` between `S6`
+and `S3` at roughly 24 km/h. A rule that reports anything on this feed is
+over-flagging.
+
+`feed-window-coverage` fires from the other end. In `demo-feed` the declared
+window closes too early; here it opens too late, leaving 2026-06-01 through
+2026-08-31 uncovered while the end date is fine. A rule that only compares
+end dates reports nothing on this feed and is under-flagging.
 
 ## Feed diff
 

@@ -16,7 +16,7 @@ the hands-on block loses the exercise, not just the setup time.
 
 | Minutes | What happens |
 |---|---|
-| 0–5 | Framing. State the arc: this system grows across all three sessions, and slice 1 done today is still load-bearing in session three. |
+| 0–5 | Framing. State the arc: this system grows across all three sessions, and slice 1 done today is still load-bearing in session three. Spend the last minute of it on `git init`, a first commit, and where the approval-mode control lives — the participant guide asks for both before the first prompt, and doing it once out loud beats doing it at eleven desks. |
 | 5–10 | Walk through the exercise brief. Do not hand out a prompt — point at the goal and the done condition and let people write their own. |
 | 10–50 | Hands-on. Circulate; do not sit at the front. People will finish the endpoint at very different times — the ones who finish early should start slice 2 rather than wait on the room. |
 | 50–60 | Debrief. |
@@ -73,3 +73,11 @@ key.
 - Someone is stuck in a loop of an agent guessing at the same error:
   suggest they paste the actual error text rather than describe the error
   in their own words.
+- The same loop one escalation later, with the agent now proposing a fix
+  it has already tried: suggest they end the session and start again from
+  the plan and the acceptance file. A session that has gone wrong is
+  carrying context they cannot see and cannot correct from inside it.
+- Someone arguing with a bad change rather than dropping it: suggest they
+  revert and rewrite the brief. This is the cheapest habit in the session
+  to install and the one people most reliably skip, because reverting
+  feels like losing the work and correcting feels like keeping it.

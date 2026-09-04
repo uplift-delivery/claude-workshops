@@ -3,6 +3,14 @@
 Companion to [`participant.md`](participant.md). Read that first; this
 guide assumes you know what participants were asked to do.
 
+## Before the session
+
+Part two needs a git worktree per thread with dependencies installed in
+each. Ask for that in the invitation and check it as people arrive.
+Creating a worktree takes seconds; installing a stack's dependencies into
+a fresh checkout does not, and someone starting that at minute twenty-seven
+loses the half of the session that is actually being measured.
+
 ## Timing
 
 | Minutes | What happens |
@@ -50,6 +58,13 @@ it and have them drive one of the two threads.
 
 ## Failure modes to interrupt
 
+Anyone still installing dependencies into a worktree at minute thirty-five.
+Have them run both threads in one checkout on files that cannot overlap —
+two different rule files, or a rule and a view — and say out loud that they
+are trading real isolation for time. The collision risk is what the worktree
+buys; on this timescale, ten minutes lost to a package manager costs more
+than the risk does.
+
 Anyone who merges a thread's work without re-running its acceptance checks.
 This is the verification lesson from session 1 returning at a larger scale,
 and it is exactly as cheap to catch here as it was then.
@@ -85,7 +100,7 @@ produce exactly the findings
 attributes to that rule under "Validation findings", and no finding may
 appear that none of their rules accounts for. Do not hold the room to all
 five findings today. Part one adds at most one rule and part two adds two, so
-five is reachable only for someone who arrived with three already done; the
+five is reachable for someone who arrived with two or three already done; the
 full set is the end state after the continuation work, not this session's bar.
 
 Over-flagging is the number to chase. It is usually not a new bug; it is two

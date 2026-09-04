@@ -7,6 +7,18 @@ leaves the system working and each is completable on its own. Take the next
 one, or skip ahead if a session pointed you somewhere specific. Every slice
 has an acceptance file that says exactly when it is done.
 
+Budget roughly three to six hours between sessions one and two — that is
+slices 2 and 3 — and two to four between sessions two and three. If you have
+less time than that, do slice 2 and stop rather than half-finishing three
+slices, and tell your facilitator: both later sessions have a path that runs
+without your own build behind it.
+
+Nothing past slice 1 requires a deployment. Every acceptance condition from
+slice 2 onward is HTTP behaviour a single local process satisfies, and the
+contract leaves storage, runtime and language entirely to you. If your cloud
+account is the thing standing between you and slice 2, run it locally and
+deploy later, or not at all.
+
 ## Slices
 
 | Slice | Goal | Acceptance |
