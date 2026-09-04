@@ -1,7 +1,7 @@
 ---
 name: gtfs-adversary
 description: Use when you want a hostile GTFS fixture built to break an ingest function or a validator that already exists - produces a feed that compounds, hides, or edges its defects instead of isolating one, and reports which of them it expects the target to miss
-tools: Read, Write, Glob, Grep, Bash
+tools: Read, Write, Glob, Grep, Bash, Skill
 ---
 
 # GTFS adversary

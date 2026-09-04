@@ -31,7 +31,7 @@ defect — pick one of the five defect kinds named in
 [`../../fixtures/demo-feed/README.md`](../../fixtures/demo-feed/README.md),
 and do not open
 [`.claude/skills/gtfs-fixture-builder/`](../../.claude/skills/gtfs-fixture-builder/)
-yourself either. Check the result against that skill's own checklist
+yourself yet. Check the result against that skill's own checklist
 once it's built. Then copy the whole `gtfs-fixture-builder/` directory
 into your repository's `.claude/skills/` — that is the entire
 installation step — start a fresh session so it gets picked up, and do
@@ -98,6 +98,14 @@ convention skill is what makes session 3 work — parallel agents produce
 mergeable code only when they agree on shape, and a skill is how that
 agreement gets written down once instead of repeated to every agent
 separately.
+
+One piece of setup before session 3, because it costs ten minutes and
+session 3 does not have ten minutes to give you: create two worktrees off
+your service repository (`git worktree add ../svc-a -b a`) and install
+your stack's dependencies in each. A worktree is a fresh checkout — the
+dependencies and anything gitignored are not in it — and finding that out
+during the exercise costs you the half of it that is actually being
+measured.
 
 ## In other tools
 

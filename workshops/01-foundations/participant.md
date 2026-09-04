@@ -27,9 +27,11 @@ empty directory — an agent that writes something wrong is only cheap to
 recover from if you can throw the change away without thinking about it.
 Then find out which approval mode you are in: whether your tool asks before
 it edits a file or runs a command, or whether it has been told not to ask.
-In Claude Code, Shift+Tab cycles the mode and `/permissions` shows what is
-already allowed. You are about to let something else type into your
-repository; know which of those two situations you are in first.
+In Claude Code the mode is named in the status bar at the bottom of the
+session; Shift+Tab cycles it, and `/permissions` lists what has already
+been allowed to run without asking. You are about to let something else
+type into your repository; know which of those two situations you are in
+first.
 
 1. Open [`../../system/api-contract.md`](../../system/api-contract.md) and
    give the agent the health endpoint section directly, rather than

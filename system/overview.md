@@ -36,10 +36,11 @@ boundary; nothing here dictates how you build any of them.
 
 ### Ingest function
 
-The ingest function reads a GTFS feed from object storage, parses it, and
-writes a normalized representation to a data store. It records what it
-ingested — counts, dates, and enough metadata for the rest of the system to
-know a feed exists and what it contains.
+The ingest function reads a GTFS feed from wherever the feed reference
+points — a directory on disk locally, object storage on a cloud — parses
+it, and writes a normalized representation to a data store. It records what
+it ingested: counts, dates, and enough metadata for the rest of the system
+to know a feed exists and what it contains.
 
 ### Validation function
 

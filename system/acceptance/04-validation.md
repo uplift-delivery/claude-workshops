@@ -42,5 +42,5 @@ agent is handed one new rule to add on its own.
 ## Verify against
 
 [`fixtures/ANSWER-KEY.md`](../../fixtures/ANSWER-KEY.md#validation-findings)'s
-"Validation findings" section, for the exact five findings, their
-locations, and their details.
+"Validation findings" section, for the exact five findings it lists under
+`demo-feed`, their locations, and their details.

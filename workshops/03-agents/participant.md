@@ -26,10 +26,12 @@ Three words this session uses precisely, because they are three different
 things. A **session** is one conversation you are steering, with its own
 transcript. A **subagent** is a brief a session hands scoped work to and
 gets a result back from — it runs inside your session and reports into it.
-A **thread** is a separate session, doing its own work at the same time as
-yours. Subagents report back, so two of them cannot collide; threads do
-not, which is why threads need isolating and subagents do not. When the
-checkpoint asks how many threads you ran, it means the third one.
+A **thread** is a separate session, doing its own work beside yours, with
+nothing collecting it. That is why part two isolates its threads and part
+one has no need to. Two subagents running at once would need the same care,
+though: reporting back is not isolation, and they still share one working
+tree. When the checkpoint asks how many threads you ran, it means the third
+one.
 
 **Part one, roughly twenty minutes.** Define one subagent and delegate one
 scoped task to it. In Claude Code a subagent is a markdown file under
@@ -54,13 +56,17 @@ session 2. Pick either:
 Review the artifact it produced — the diff, the fixture, the finding — not
 the transcript of how it got there.
 
-Then confirm it actually ran. Invoke it by name, and check that the
-subagent appears in the transcript doing the work rather than your main
-session doing the same work with a file sitting unread on disk. This is
-session 2's checkpoint again in a different costume: if it did not fire,
-the fix is the `description`, not the brief. A subagent that never ran and
-a subagent that ran well produce the same rule and look identical
-afterwards, which is exactly why this has to be checked at the time.
+Then confirm it actually ran — the one thing worth opening the transcript
+for. Ask for the work by name and check that the subagent appears doing it,
+rather than your main session doing the same work with a file sitting
+unread on disk. If nothing delegates, the file is the problem: check the
+path and the frontmatter, and restart the session in case a brand-new
+`.claude/agents/` directory was not picked up. Then ask for the same job
+again without naming it. That second run is session 2's checkpoint in a
+different costume, and it is the one the `description` is on trial for. A
+subagent that never ran and a subagent that ran well produce the same rule
+and look identical afterwards, which is why this gets checked at the
+time.
 
 **Part two, roughly twenty minutes.** Start two threads on independent work
 from [`../../system/backlog.md`](../../system/backlog.md) — two different
@@ -80,6 +86,13 @@ a local database file, a credentials JSON — is not there either. Install
 and copy those in before you start the threads, not after a thread has
 already failed on a missing module.
 
+Commit inside each worktree before you integrate — uncommitted work is
+invisible to a merge, and `git merge` will tell you it is `Already up to
+date.` rather than that it found nothing. Merge from the original checkout
+with `git merge rule-a`, then `git merge rule-b`; do not `git checkout
+rule-a` there, because git refuses a branch another worktree is holding.
+`git worktree remove ../svc-rule-a` cleans up afterwards.
+
 **Integration, roughly ten minutes after that.** Merge both threads' work and
 confirm the whole system still satisfies its acceptance criteria — if you
 built the re-runnable check session 1 asked for, this is what it was for.
@@ -92,8 +105,9 @@ Every validation rule you have implemented produces exactly the findings
 [`../../fixtures/ANSWER-KEY.md`](../../fixtures/ANSWER-KEY.md#validation-findings)
 attributes to that rule under "Validation findings", and no finding appears
 that none of your rules should produce. Do not measure yourself against all
-five: part one adds at most one rule and part two adds two, so five is the
-end state after the continuation work, not today's bar. Over-flagging is the
+five: part one adds at most one rule and part two adds two, so unless you
+arrived with two or three already done, five is the end state after the
+continuation work, not today's bar. Over-flagging is the
 signal to chase — a finding no implemented rule accounts for usually means
 two threads implemented overlapping rules and the same defect is reported
 twice under two names.
@@ -123,7 +137,8 @@ you are going to run at once, and write down why that number and not the
 maximum available is the right one for what you know about the pieces and
 about each other. Then run it — a worktree and a session per piece, in
 whatever tool you used today, is enough; tools that manage the threads for
-you, like Zed's agent panel or Cursor's background agents, change the
+you, like Zed's agent panel or Cursor's cloud agents (the feature it used
+to call background agents), change the
 plumbing and not the decision — and check that decision against what
 integration actually cost once everything is merged. The
 number of threads is a decision with a cost attached to it, not a default —
