@@ -13,6 +13,26 @@ guide assumes you know what participants were asked to do.
 | 45–55 | Fresh-session tests. Run several out loud, in front of the room. |
 | 55–60 | Debrief and the setup for session 3. |
 
+## If the week's build didn't happen
+
+Part one runs from nothing. It needs `fixtures/demo-feed/README.md`, the
+provided [`gtfs-fixture-builder`](../../.claude/skills/gtfs-fixture-builder/)
+skill, and a working agent — none of the participant's own code. So the
+only thing at risk is part two, and the fix is to point it at what part
+one just produced rather than at a week that did not happen.
+
+Say it plainly: "Your first fixture run just showed you something you had
+to tell your agent that it should have known — a file it left out, a
+second defect it bundled in by accident, a `stop_sequence` that repeated
+instead of increasing. That is your skill. Write that one." A skill
+capturing a mistake made twenty minutes ago passes the fresh-session test
+exactly as well as one capturing a mistake made on Tuesday, and the
+technique being taught is identical.
+
+Keep this as the fallback rather than the default. Anyone who did build
+during the week has better raw material, and offering the part-one route
+to the room at large gets you eleven skills about `stop_sequence`.
+
 ## Failure modes to allow
 
 - Writing a skill that restates the GTFS specification rather than the
@@ -63,3 +83,9 @@ excellent five-minute detour.
   validator's file goes, how it registers) — these are different
   lifetimes and different audiences, and slice 4's convention skill only
   needs the second kind.
+- Someone has written something always true about their own repository —
+  the run command, the stack, where things live — into a skill: point
+  them at the always-on project file instead (`CLAUDE.md`, `AGENTS.md`,
+  `.github/copilot-instructions.md`). Knowledge that is relevant every
+  single time does not need a description deciding whether it is
+  relevant, and giving it one is how it ends up not firing.

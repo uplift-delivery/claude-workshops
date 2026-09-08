@@ -12,9 +12,11 @@ Slice 02 complete.
 
 1. `POST /feeds/{feedId}/validation` returns status 202.
 2. After validation completes, `GET /feeds/{feedId}/validation` returns a
-   report whose findings are exactly the five in the answer key — no more
-   and no fewer. A report with extra findings is over-flagging; a report
-   with fewer is under-flagging. Both are wrong.
+   report whose findings are exactly the five the answer key lists for
+   `demo-feed` — no more and no fewer. A report with extra findings is
+   over-flagging; a report with fewer is under-flagging. Both are wrong.
+   `demo-feed-v2` has its own set of five in the same section of the
+   answer key; they are not the same five.
 3. Each finding carries the rule's name, a severity, and the entity it
    concerns.
 
@@ -40,5 +42,5 @@ agent is handed one new rule to add on its own.
 ## Verify against
 
 [`fixtures/ANSWER-KEY.md`](../../fixtures/ANSWER-KEY.md#validation-findings)'s
-"Validation findings" section, for the exact five findings, their
-locations, and their details.
+"Validation findings" section, for the exact five findings it lists under
+`demo-feed`, their locations, and their details.

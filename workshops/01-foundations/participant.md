@@ -22,12 +22,26 @@ Goal: get a health endpoint running and reachable — on your cloud if your
 account is ready, running locally otherwise — using the agent to scaffold
 it.
 
+Two things before the first prompt. Run `git init` and commit, even on an
+empty directory — an agent that writes something wrong is only cheap to
+recover from if you can throw the change away without thinking about it.
+Then find out which approval mode you are in: whether your tool asks before
+it edits a file or runs a command, or whether it has been told not to ask.
+In Claude Code the mode is named in the status bar at the bottom of the
+session; Shift+Tab cycles it, and `/permissions` lists what has already
+been allowed to run without asking. You are about to let something else
+type into your repository; know which of those two situations you are in
+first.
+
 1. Open [`../../system/api-contract.md`](../../system/api-contract.md) and
    give the agent the health endpoint section directly, rather than
-   describing it from memory.
+   describing it from memory. In Claude Code that is `@` and the path —
+   `@system/api-contract.md` — which puts the file itself in front of the
+   agent instead of your paraphrase of it.
 2. Before it writes anything, get a plan out of it: what it will create,
-   where, and how you will run it. Read the plan and correct at least one
-   thing.
+   where, and how you will run it. Claude Code has a plan mode for exactly
+   this — Shift+Tab into it and it will not touch a file until you accept
+   what it proposes. Read the plan and correct at least one thing.
 3. Let it implement. Do not accept "done" as a result.
 4. Call the endpoint yourself and read the response body.
 5. Confirm against
@@ -42,6 +56,32 @@ Did you read the plan or skim it? When the agent said it was done, what did
 you actually check, rather than take on faith? If you corrected the plan
 before it wrote anything, would the code have been wrong without that
 correction?
+
+## Working without a room
+
+The next three weeks are the part nobody watches. Three habits carry the
+technique into them.
+
+Commit before you let the agent write, every time, and keep the commits
+small enough that throwing one away costs nothing. A bad run is not an
+argument to win — it is a change to revert and a brief to rewrite. The
+second attempt with a better brief beats the fourth attempt at correcting
+the first one, and it is not close.
+
+Know when a session has gone stale. The signal is the agent re-proposing a
+fix it already tried, or reaching for files that have nothing to do with
+what you asked. That is not a prompt to escalate; it is a session carrying
+too much wrong context to recover from. End it and start again from the
+plan and the acceptance file, rather than from the transcript.
+
+And make the check something you can run again. Before you start slice 2,
+have the agent turn
+[`../../system/acceptance/01-health.md`](../../system/acceptance/01-health.md)'s
+done-conditions into a script in your own stack — a request and a
+comparison is enough — then run it at the end of every slice after this
+one. Calling the endpoint by hand is the right thing to do once. It is the
+wrong thing to do forty times, and by session 3 you will have two threads'
+work to confirm at once.
 
 ## Continue on your own
 
