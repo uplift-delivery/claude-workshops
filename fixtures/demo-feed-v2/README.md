@@ -1,5 +1,5 @@
 This is the same transit agency's feed one schedule pick later, generated
-for the next quarter. It is the comparison target for slice 6's feed diff:
+for the next quarter. It is the comparison target for the feed diff:
 route `R2` and its trip are gone, route `R1` loses its weekend trip, stop
 `S3` moves, trip `T1` shifts five minutes later, and the declared feed
 window moves from 20260601-20260731 to 20260901-20261231.
