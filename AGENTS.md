@@ -1,5 +1,11 @@
 # Agent conventions
 
+## Purpose
+
+This repository creates workshop content for **humans** to read and learn
+from: how to use AI for software development. Every document here is written
+for a person working through a session, not for an agent.
+
 ## Development workflow
 
 - Do all development in a git worktree, never directly in the main checkout.
