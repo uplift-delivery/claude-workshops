@@ -6,14 +6,23 @@ No `CLAUDE.md`, no skills. Plan before it writes; verify before you believe it.
 **You build:** [`01-health.feature`](../../system/features/01-health.feature)
 and [`02-ingest.feature`](../../system/features/02-ingest.feature).
 
-**Prerequisites:** [Before session 1](../README.md#before-session-1-15-minutes) is done.
+**Prerequisites:** [Before session 1](../README.md#before-session-1-10-minutes) is done.
 
 ## Steps
 
-### 1. Get ready (5 min)
+### 1. Set up (5 min)
 
-- Commit, so any bad change is one `git restore .` away.
-- Find your permission mode in the status bar. **Shift+Tab** cycles it.
+1. Create your service repository with the spec in it, and commit, so any
+   bad change is one `git restore .` away:
+
+   ```sh
+   mkdir transit-service && cd transit-service && git init
+   cp -r <this-repo>/system <this-repo>/fixtures .
+   git add . && git commit -m "Add spec and fixtures"
+   ```
+
+2. Start `claude` there. Find your permission mode in the status bar.
+   **Shift+Tab** cycles it.
 
 ### 2. Health check (15 min)
 
@@ -40,7 +49,7 @@ You will re-run this in sessions 2 and 3.
 
 ## Done when
 
-- You have seen `{"status": "ok"}` and the counts `1 / 6 / 3 / 4 / 12` with your own eyes.
+- You have seen every scenario in both feature files pass with your own eyes.
 - Your check script passes.
 
 ## Notice

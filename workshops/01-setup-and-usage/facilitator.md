@@ -7,7 +7,7 @@ and checking the output yourself are how you catch it.
 
 ## Before
 
-Check every participant finished [Before session 1](../README.md#before-session-1-15-minutes).
+Check every participant finished [Before session 1](../README.md#before-session-1-10-minutes).
 Anyone installing a tool during the session loses the exercise.
 
 ## Timing

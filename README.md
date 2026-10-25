@@ -10,7 +10,7 @@ validates public transit schedules ([overview](system/overview.md)).
 | [2. Skills and context](workshops/02-skills-and-context/README.md) | `CLAUDE.md`, skills, conventions |
 | [3. Parallel agents](workshops/03-parallel-agents/README.md) | Agent teams and parallel threads |
 
-**Start here:** [workshops/README.md](workshops/README.md). It has the 15-minute setup.
+**Start here:** [workshops/README.md](workshops/README.md). It has the 10-minute setup.
 
 Nothing is required between sessions. Bring any language or stack.
 

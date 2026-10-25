@@ -8,9 +8,11 @@ integrate it. Parallel work is only as good as your brief and your merge.
 
 ## Catch up (before the session)
 
-No validation endpoint or `add-validation-rule` skill yet? Do
-[session 2, step 3](../02-skills-and-context/README.md#3-write-a-convention-skill-and-use-it-30-min)
-first. Without the skill, the agents will each invent a different shape.
+No validation endpoint or `add-validation-rule` skill yet? In a fresh session:
+
+`Implement @system/features/01-health.feature, @system/features/02-ingest.feature, and the validation endpoint with only the null-island-stop rule from @system/features/04-validation.feature. Make each rule one file. Then write .claude/skills/add-validation-rule/SKILL.md describing how to add a rule. Show me a plan first.`
+
+Without the skill, the agents will each invent a different shape.
 
 ## Steps
 
@@ -60,13 +62,11 @@ keeps them apart.
 
 1. Track B only: merge each branch from your main checkout
    (`git merge worktree-travel-speed`, and so on).
-2. Run your check script and the full validation scenario outline.
-3. Validate `demo-feed-v2` too. Its expected findings differ.
+2. Run your check script and every scenario in `04-validation.feature`.
 
 ## Done when
 
-- Every row of `04-validation.feature` passes for both feeds.
-- `demo-feed` has exactly 5 findings.
+- Every scenario in `04-validation.feature` passes.
 - You wrote down: how many agents you ran, minutes from last agent done to
   all green, and what you fixed by hand.
 

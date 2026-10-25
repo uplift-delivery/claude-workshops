@@ -39,12 +39,13 @@ Health and ingest not finished? In a fresh session:
 
 1. Plan mode:
    `Add POST and GET /feeds/{feedId}/validation and the null-island-stop rule from @system/features/04-validation.feature. Design it so each rule is one file and adding a rule never edits another.`
-2. Build it. Check the `null-island-stop` rows of the scenario outline. Commit.
+2. Build it. Check the `null-island-stop` rows of the scenario outline.
 3. Ask the agent to write `.claude/skills/add-validation-rule/SKILL.md` from
    what it just built: where a rule file goes, how it registers, the finding
    shape, how to test it.
 4. Rewrite the `description` yourself. Say **when** to use it, not what it
    is. Model it on `gtfs-fixture-builder`'s.
+5. Commit. Session 3 starts from this commit.
 
 ## Done when
 
@@ -59,7 +60,3 @@ Not firing? Fix the `description`, not the body.
 - Which facts did you stop typing today?
 - Session 3 runs four agents at once. This skill is the only reason their
   code will match.
-
-## Before session 3 (5 min)
-
-Commit everything. Session 3 starts from a clean tree.
