@@ -83,7 +83,7 @@ The complete expected set is five findings.
 
 ### `demo-feed-v2`
 
-Slice 5 renders a report for every ingested feed and slice 6 needs this one
+The UI renders a report for every ingested feed and the diff needs this one
 ingested, so you will validate it too. Its expected set is also five
 findings, but three of the rules land differently.
 
